@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">KotlinTest</string>
+    <string name="info_version">Version</string>
+    <string name="info_board">Board</string>
+    <string name="info_bootloader">Bootloader</string>
+    <string name="info_brand">Brand</string>
+    <string name="info_device">Device</string>
+    <string name="info_display">Display</string>
+    <string name="info_fingerprint">FingerPrint</string>
+    <string name="info_hardware_name">Hardware Name</string>
+    <string name="info_id">Id</string>
+    <string name="info_manufacturer">Manufacturer</string>
+    <string name="info_model">Model</string>
+    <string name="info_product">Product</string>
+    <string name="info_abis">Abis</string>
+    <string name="info_radio_version">Radio Version</string>
+    <string name="info_serial">Serial</string>
+</resources>

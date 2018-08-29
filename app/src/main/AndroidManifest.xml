@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.vermond.kotlintest">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".old.MainActivity">
+        </activity>
+
+        <activity android:name=".com.example.vermond.kotlintest.soda.SodaRocketReady"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".com.example.vermond.kotlintest.soda.SodaRocketGame"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".com.example.vermond.kotlintest.soda.SodaRocketRank"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".com.example.vermond.kotlintest.soda.SodaRocketResult"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".com.example.vermond.kotlintest.soda.SodaRocketShop"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".old.DeviceInfoActivity"/>
+        <activity android:name=".old.SodaRocket"/>
+        
+    </application>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    
+</manifest>

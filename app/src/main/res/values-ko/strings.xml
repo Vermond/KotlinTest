@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Kotlin 테스트</string>
+    <string name="info_version">버전</string>
+    <string name="info_board">보드</string>
+    <string name="info_bootloader">부트로더</string>
+    <string name="info_brand">브랜드</string>
+    <string name="info_device">기기</string>
+    <string name="info_display">디스플레이</string>
+    <string name="info_fingerprint">지문</string>
+    <string name="info_hardware_name">하드웨어명</string>
+    <string name="info_manufacturer">제조사</string>
+    <string name="info_model">모델</string>
+    <string name="info_radio_version">라디오 버전</string>
+    <string name="info_serial">시리얼</string>
+</resources>
