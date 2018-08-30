@@ -22,6 +22,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".com.example.vermond.kotlintest.soda.SodaRocketInit"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
         <activity android:name=".com.example.vermond.kotlintest.soda.SodaRocketGame"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>

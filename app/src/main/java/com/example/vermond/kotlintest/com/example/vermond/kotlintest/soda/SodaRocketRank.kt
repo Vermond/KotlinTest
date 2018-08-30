@@ -9,6 +9,7 @@ import android.os.HandlerThread
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import com.example.vermond.kotlintest.R
 import com.example.vermond.kotlintest.com.example.vermond.kotlintest.soda.db.AppDatabase
 import com.example.vermond.kotlintest.com.example.vermond.kotlintest.soda.db.ScoreData
@@ -19,7 +20,8 @@ class SodaRocketRank: AppCompatActivity() {
     enum class DBWorkType(val type: Int) {
         INSERT(1),
         DELETE_ALL(2),
-        READ_ALL(3)
+        READ_COUNT(3),
+        READ_ALL(99)
     }
 
     private var db:AppDatabase? = null
@@ -78,13 +80,14 @@ class SodaRocketRank: AppCompatActivity() {
 
         // 유효한 점수만 기록하도록 하자
         if (score > 0) workType = DBWorkType.INSERT
-        else workType = DBWorkType.READ_ALL
+        else workType = DBWorkType.READ_COUNT
 
         dbHandler.post(dbRunnable)
 
         findViewById<Button>(R.id.ranking_button_reset).setOnClickListener {
             workType = DBWorkType.DELETE_ALL
             dbHandler.post(dbRunnable)
+            Toast.makeText(this as Context, "모든 점수가 삭제되었습니다", Toast.LENGTH_SHORT).show()
         }
 
         findViewById<Button>(R.id.ranking_button_back).setOnClickListener {
@@ -107,15 +110,20 @@ class SodaRocketRank: AppCompatActivity() {
                 var scoreData: ScoreData = ScoreData(score)
                 scoreDataDao?.insertScore(scoreData)
 
-                testDBWork(DBWorkType.READ_ALL)
+                testDBWork(DBWorkType.READ_COUNT)
             }
-            DBWorkType.READ_ALL -> {
+            DBWorkType.READ_COUNT -> {
                 //UI는 UI 스레드에서만 변경됨
-                scoreList = scoreDataDao?.getAllScore()
+                scoreList = scoreDataDao?.getScores(10)
                 scoreUpdateHandler.post(scoreUpdateRunnable)
             }
             DBWorkType.DELETE_ALL -> {
                 scoreDataDao?.deleteAllScore()
+                scoreList = scoreDataDao?.getAllScore()
+                scoreUpdateHandler.post(scoreUpdateRunnable)
+            }
+            DBWorkType.READ_ALL -> {
+                // default 역할을 위해 남겨둠
                 scoreList = scoreDataDao?.getAllScore()
                 scoreUpdateHandler.post(scoreUpdateRunnable)
             }

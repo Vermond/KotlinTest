@@ -10,7 +10,10 @@ import android.arch.persistence.room.Query
 interface ScoreDataDao {
 
     @Query("select * from score_data")
-    fun getAllScore() : List<ScoreData>
+    fun getAllScore(): List<ScoreData>
+
+    @Query("select * from score_data order by score desc limit :count")
+    fun getScores(count: Int): List<ScoreData>
 
     @Query("delete from score_data")
     fun deleteAllScore()

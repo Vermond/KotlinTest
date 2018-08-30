@@ -20,6 +20,10 @@ class SodaRocketResult : AppCompatActivity() {
         var score:Double = intent.extras.getDouble("score")
         findViewById<TextView>(R.id.result_text_score).setText(String.format("%.2f", score))
 
+        // save score to money
+        var money : Float = score.toFloat() / 10 * intent.extras.getFloat("bonusPointRate") + getSharedPreferences(Values.PrefName, Context.MODE_PRIVATE).getFloat(Values.PrefMoneyName, 0f);
+        getSharedPreferences(Values.PrefName, Context.MODE_PRIVATE).edit().putFloat(Values.PrefMoneyName, money).apply()
+
         findViewById<Button>(R.id.result_button_rank).setOnClickListener {
             var intent: Intent = Intent(this as Context, SodaRocketRank::class.java)
             intent.putExtra("score", score)

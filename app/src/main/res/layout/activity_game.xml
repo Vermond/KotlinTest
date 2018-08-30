@@ -4,12 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_margin="5dp"
+    android:background="@drawable/ui_frame_dark_transparent">
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/game_imageView_soda"
+        android:layout_width="200dp"
+        android:layout_height="250dp"
         android:layout_margin="75dp"
         app:srcCompat="@drawable/bottle_2_960_720"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,7 +23,8 @@
         android:id="@+id/game_text_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
+        android:text="0.0"
+        android:textSize="26sp"
         android:layout_margin="20dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
