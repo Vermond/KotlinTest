@@ -36,7 +36,7 @@ class SodaRocketShop : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shop)
 
-        //초기화 먼저 하자
+        //초기화
         itemImage = findViewById<ImageView>(R.id.shop_image_goods)
         itemText = findViewById<TextView>(R.id.shop_text_desc)
         pointText = findViewById<TextView>(R.id.shop_text_point)
@@ -83,9 +83,6 @@ class SodaRocketShop : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-
-        //save current buying result
-        //getSharedPreferences(Values.PrefName, Context.MODE_PRIVATE).edit().putInt(Values.PrefSodaHave, sodaHave).apply()
     }
 
     fun bitPow2(i: Int): Int {
@@ -93,13 +90,12 @@ class SodaRocketShop : AppCompatActivity() {
         else return 2 shl (i - 1)
     }
 
+    //아이템 종류에 맞도록 이미지와 설명 변경
     fun changeItemInfo() {
         when (currentType) {
             ItemType.Item -> {
                 itemImage.setImageResource(Values.ItemIconList[curIndex])
                 itemText.setText(Values.ItemDescList[curIndex])
-
-                Log.i("tag", String.format("%d, %d (%d) : %d", itemHave, curIndex, bitPow2(curIndex), itemHave.and(bitPow2(curIndex))))
 
                 if (itemHave.and(bitPow2(curIndex)) != 0) {
                     buyBtn.isEnabled = false
@@ -113,7 +109,6 @@ class SodaRocketShop : AppCompatActivity() {
                 itemImage.setImageResource(Values.SodaImageList[curIndex])
                 itemText.setText(Values.SodaDescList[curIndex])
 
-                //Log.i("tag", String.format("%d, %d (%d) : %d", sodaHave, curIndex, bitPow2(curIndex), sodaHave.and(bitPow2(curIndex))))
                 if (sodaHave.and(bitPow2(curIndex)) != 0) {
                     buyBtn.isEnabled = false
                     buyBtn.setText("보유중")
@@ -125,6 +120,7 @@ class SodaRocketShop : AppCompatActivity() {
         }
     }
 
+    //구매 시도 및 처리
     fun tryBuying() {
         when (currentType) {
             ItemType.Item -> {

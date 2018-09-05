@@ -30,16 +30,17 @@ class SodaRocketRank: AppCompatActivity() {
     var scoreList : List<ScoreData>? = null
     var workType: DBWorkType = DBWorkType.READ_ALL
 
+    //메인 쓰레드에서 DB 접속 불가능하므로 별도 쓰레드로 등록한다
     var dbHandlerThread:HandlerThread = HandlerThread("DBHandlerThread")
     lateinit var dbHandler:Handler
     var dbRunnable:Runnable = Runnable {
         testDBWork(workType)
     }
 
+    //UI은 메인 쓰레드에서만 동작하므로 UI 업데이트용으로 만든다
     var scoreUpdateHandler:Handler = Handler()
     var scoreUpdateRunnable:Runnable = Runnable {
         if (scoreList != null) {
-            //for (i in scoreList!!.indices) {
             for (i in 0..9) {
                 var text: TextView?;
 
@@ -78,12 +79,13 @@ class SodaRocketRank: AppCompatActivity() {
         db = AppDatabase.getInstance(applicationContext)
         if (db != null) scoreDataDao = db?.scoreDataDao()
 
-        // 유효한 점수만 기록하도록 하자
+        // 유효한 점수만 기록한다
         if (score > 0) workType = DBWorkType.INSERT
         else workType = DBWorkType.READ_COUNT
 
         dbHandler.post(dbRunnable)
 
+        //버튼 리스너 등록
         findViewById<Button>(R.id.ranking_button_reset).setOnClickListener {
             workType = DBWorkType.DELETE_ALL
             dbHandler.post(dbRunnable)
@@ -104,9 +106,7 @@ class SodaRocketRank: AppCompatActivity() {
     fun testDBWork(type:DBWorkType) {
         when (type) {
             DBWorkType.INSERT -> {
-                //임시
-                //메인 쓰레드에서 DB 접속 불가능
-                //save score to rank db
+                //db에 점수 저장
                 var scoreData: ScoreData = ScoreData(score)
                 scoreDataDao?.insertScore(scoreData)
 

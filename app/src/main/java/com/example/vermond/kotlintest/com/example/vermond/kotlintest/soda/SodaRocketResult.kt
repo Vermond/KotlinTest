@@ -16,11 +16,11 @@ class SodaRocketResult : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
 
-        // get score
+        // 점수 얻기
         var score:Double = intent.extras.getDouble("score")
         findViewById<TextView>(R.id.result_text_score).setText(String.format("%.2f", score))
 
-        // save score to money
+        // 점수를 포인트로 변환해서 추가하기
         var money : Float = score.toFloat() / 10 * intent.extras.getFloat("bonusPointRate") + getSharedPreferences(Values.PrefName, Context.MODE_PRIVATE).getFloat(Values.PrefMoneyName, 0f);
         getSharedPreferences(Values.PrefName, Context.MODE_PRIVATE).edit().putFloat(Values.PrefMoneyName, money).apply()
 

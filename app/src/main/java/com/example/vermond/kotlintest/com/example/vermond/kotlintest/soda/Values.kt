@@ -8,6 +8,7 @@ class Stat(_time:Long, _power:Float, _point:Float) {
     val point = _point
 }
 
+//게임용 자료 선언하는 곳
 class Values {
     companion object {
         const val ACTIVITY_CHILD = 10

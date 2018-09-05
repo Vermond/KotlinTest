@@ -36,7 +36,6 @@ class SodaRocketInit : AppCompatActivity() {
         alertText.animation = animSet
 
         animRunnable = Runnable {
-            //AlphaAnimation
             alertText.startAnimation(animSet)
 
             animHandler.postDelayed(animRunnable, 2000)
@@ -47,7 +46,7 @@ class SodaRocketInit : AppCompatActivity() {
 
 
     override fun onBackPressed() {
-        //동작하지 않게 한다
+        //동작하지 않게 하기 위해서 코드를 넣지 않는다
     }
 
     override fun onUserInteraction() {

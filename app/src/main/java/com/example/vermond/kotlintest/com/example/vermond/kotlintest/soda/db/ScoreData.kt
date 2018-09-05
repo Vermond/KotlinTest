@@ -15,4 +15,3 @@ import kotlinx.android.parcel.Parcelize
 @Entity(tableName = "score_data")
 data class ScoreData(@ColumnInfo(name = "score")var score: Double,
                    @PrimaryKey(autoGenerate = true) var id: Long = 0) : Parcelable
-//You can aslo declare the primary key by adding @PrimaryKey Annotation

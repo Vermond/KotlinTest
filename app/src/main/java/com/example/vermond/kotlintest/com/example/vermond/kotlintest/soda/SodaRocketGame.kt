@@ -22,9 +22,6 @@ class SodaRocketGame : AppCompatActivity(), SensorEventListener {
     lateinit var sensorManager:SensorManager
     lateinit var sensor:Sensor
 
-    var prevX:Float = 0.0f
-    var prevY:Float = 0.0f
-    var prevZ:Float = 0.0f
     val standardSub:Float = 20f //흔듬 감지를 위한 최소값
 
     var totalScore:Double = 0.0
@@ -32,6 +29,7 @@ class SodaRocketGame : AppCompatActivity(), SensorEventListener {
 
     var timerHandler:Handler = Handler()
     var timerRunnable:Runnable = Runnable {
+        //결과 화면으로 점수 및 기타 정보 전달, 화면 변경
         val intent:Intent = Intent(this as Context, SodaRocketResult::class.java)
         intent.putExtra("score", totalScore)
         intent.putExtra("bonusPointRate", bonusPointRate)
@@ -42,8 +40,13 @@ class SodaRocketGame : AppCompatActivity(), SensorEventListener {
     lateinit var animSet : AnimationSet
     var animHandler = Handler()
     lateinit var animRunnable : Runnable
+
+    //흔들기 애니메이션 재생 시간 (ms)
+    //작을수록 애니메이션 빨라짐
     var totalAnimationTime : Long = 500
+    //흔들기 애니메이션 흔들어짐 정도
     var maxShakePower = 30;
+    //흔들기 애니메이션 캔 확대 축소 정도
     var maxScalePower : Float = 1.05f;
 
     var bonusTime:Long = 0
@@ -57,7 +60,7 @@ class SodaRocketGame : AppCompatActivity(), SensorEventListener {
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION)
 
-        //init for animation
+        // 초기화
         image = findViewById<ImageView>(R.id.game_imageView_soda)
         animSet = AnimationSet(true)
         animSet.setInterpolator(AccelerateInterpolator())
@@ -104,7 +107,6 @@ class SodaRocketGame : AppCompatActivity(), SensorEventListener {
         }
 
         timerHandler.postDelayed(timerRunnable, gameTime)
-        //animHandler.post(animRepeatRunnable)
         animHandler.postDelayed(animRunnable, totalAnimationTime)
     }
 
@@ -143,13 +145,6 @@ class SodaRocketGame : AppCompatActivity(), SensorEventListener {
                 val y: Float = event.values[SensorManager.AXIS_Y - 1]
                 val z: Float = event.values[SensorManager.AXIS_Z - 1]
                 val power: Double = Math.sqrt((x * x + y * y + z * z).toDouble()) + bonusPower
-
-                val sub: Float = Math.abs(Math.abs(x - prevX) + Math.abs(y - prevY) + Math.abs(z - prevZ))
-
-                //save previous value
-                prevX = x
-                prevY = y
-                prevZ = z
 
                 if (power > standardSub) {
                     //흔들때 진동 추가
@@ -194,9 +189,6 @@ class SodaRocketGame : AppCompatActivity(), SensorEventListener {
                             maxScalePower = 1.15f
                         }
                     }
-
-
-
                 }
             }
         }

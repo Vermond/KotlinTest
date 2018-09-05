@@ -36,7 +36,7 @@ class SodaRocketReady : AppCompatActivity() {
         val i:Intent = Intent(this as Context, SodaRocketInit::class.java)
         startActivity(i)
 
-        //init
+        //초기화
         sodaImage = findViewById(R.id.ready_image_soda)
         sodaText = findViewById(R.id.ready_text_soda)
         itemImage = findViewById(R.id.ready_image_item)
